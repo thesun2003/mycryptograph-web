@@ -3,6 +3,11 @@
     width: 100%;
     margin: 0 auto;
 }
+
 .current-balance-page .chart {
     margin: 0 auto;
+}
+
+.current-balance-page .totals span {
+    font-weight: bold;
 }

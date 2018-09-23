@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import Loader from 'react-loader-spinner'
 
@@ -71,9 +71,9 @@ class CurrentBalancePage extends Component {
 
         if (this.state.totals) {
             totals = (
-                <span>
-                Total: {this.state.totals['btcValue']} BTC, {this.state.totals['usdValue']} USD
-            </span>
+                <Fragment>
+                    <span>Total:</span> {this.state.totals['btcValue']} BTC, {this.state.totals['usdValue']} USD
+                </Fragment>
             );
         }
 
@@ -87,7 +87,7 @@ class CurrentBalancePage extends Component {
                 <div className="chart">
                     {this.getChart()}
                 </div>
-                <div>
+                <div className="totals">
                     {this.getTotals()}
                 </div>
             </div>
