@@ -11,7 +11,8 @@ class CurrentBalancePage extends Component {
         super(props);
 
         this.state = {
-            data: null
+            data: null,
+            totals: null,
         };
     }
 
@@ -38,7 +39,7 @@ class CurrentBalancePage extends Component {
         const res = await axios.get(apiUrl);
         const allData = this.prepareData(res.data, 'usdValue');
 
-        this.setState({ data: allData });
+        this.setState({ data: allData, totals: res.data['totals'] });
     }
 
     getChart() {
@@ -65,12 +66,29 @@ class CurrentBalancePage extends Component {
         return chart;
     }
 
+    getTotals() {
+        let totals = '';
+
+        if (this.state.totals) {
+            totals = (
+                <span>
+                Total: {this.state.totals['btcValue']} BTC, {this.state.totals['usdValue']} USD
+            </span>
+            );
+        }
+
+        return totals;
+    }
+
     render() {
         return (
             <div className="current-balance-page">
                 <h1>Current Balance</h1>
                 <div className="chart">
                     {this.getChart()}
+                </div>
+                <div>
+                    {this.getTotals()}
                 </div>
             </div>
         );
