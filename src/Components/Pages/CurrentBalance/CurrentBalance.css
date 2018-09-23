@@ -1,0 +1,8 @@
+.current-balance-page {
+    max-width: 1280px;
+    width: 100%;
+    margin: 0 auto;
+}
+.current-balance-page .chart {
+    margin: 0 auto;
+}
