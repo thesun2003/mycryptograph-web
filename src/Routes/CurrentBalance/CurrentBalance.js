@@ -2,11 +2,12 @@ import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import Loader from 'react-loader-spinner'
 
-import DonutChart from '../../../Components/Visualisation/DonutChart/DonutChart';
+import Template, { Page, Section } from "../../Common/Templates/Template";
+import DonutChart from '../../Common/Visualisation/DonutChart/DonutChart';
 
 import './CurrentBalance.css';
 
-class CurrentBalancePage extends Component {
+class CurrentBalance extends Component {
     constructor(props) {
         super(props);
 
@@ -36,8 +37,19 @@ class CurrentBalancePage extends Component {
     async componentDidMount() {
         const apiUrl = 'http://mcg-api.local/get-total-balances/';
 
+        let balanceType;
+        switch (this.props.balanceType) {
+            case 'BTC':
+                balanceType = 'btcValue';
+                break;
+            case 'USD':
+            default:
+                balanceType = 'usdValue';
+                break;
+        }
+
         const res = await axios.get(apiUrl);
-        const allData = this.prepareData(res.data, 'usdValue');
+        const allData = this.prepareData(res.data, balanceType);
 
         this.setState({ data: allData, totals: res.data['totals'] });
     }
@@ -81,18 +93,24 @@ class CurrentBalancePage extends Component {
     }
 
     render() {
-        return (
-            <div className="current-balance-page">
-                <h1>Current Balance</h1>
-                <div className="chart">
-                    {this.getChart()}
-                </div>
-                <div className="totals">
-                    {this.getTotals()}
-                </div>
-            </div>
+        return Template.render(
+            (
+                <Page layout="main">
+                    <Section slot="content">
+                        <div className="current-balance-page">
+                            <h1>Current Balance</h1>
+                            <div className="chart">
+                                {this.getChart()}
+                            </div>
+                            <div className="totals">
+                                {this.getTotals()}
+                            </div>
+                        </div>
+                    </Section>
+                </Page>
+            )
         );
     }
 }
 
-export default CurrentBalancePage;
+export default CurrentBalance;

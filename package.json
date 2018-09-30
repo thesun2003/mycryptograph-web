@@ -8,6 +8,8 @@
     "react-dom": "^16.5.1",
     "react-google-charts": "^3.0.8",
     "react-loader-spinner": "^2.0.6",
+    "react-page-layout": "^0.9.8",
+    "react-router-component": "^0.39.1",
     "react-scripts": "1.1.5",
     "react-vis": "^1.11.2"
   },
