@@ -1,17 +1,20 @@
 {
   "name": "mycryptograph-web",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "axios-cache-adapter": "^2.1.1",
+    "localforage": "^1.7.2",
+    "localforage-memoryStorageDriver": "^0.9.2",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
     "react-google-charts": "^3.0.8",
+    "react-helmet": "^5.2.0",
     "react-loader-spinner": "^2.0.6",
     "react-page-layout": "^0.9.8",
     "react-router-component": "^0.39.1",
-    "react-scripts": "1.1.5",
-    "react-vis": "^1.11.2"
+    "react-scripts": "1.1.5"
   },
   "scripts": {
     "start": "npm install && react-scripts start",

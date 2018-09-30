@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import axios from 'axios';
+import { Helmet } from 'react-helmet';
 import Loader from 'react-loader-spinner'
-
+import caxios from "../../Common/caxios";
 import Template, { Page, Section } from "../../Common/Templates/Template";
 import DonutChart from '../../Common/Visualisation/DonutChart/DonutChart';
 
@@ -17,7 +17,7 @@ class CurrentBalance extends Component {
         };
     }
 
-    prepareData(data, fieldName) {
+    static prepareData(data, fieldName) {
         let preparedData = [
             ["Currency", "Value"]
         ];
@@ -35,6 +35,7 @@ class CurrentBalance extends Component {
     }
 
     async componentDidMount() {
+        const ttl = 5 * 60; // 5 minutes
         const apiUrl = 'http://mcg-api.local/get-total-balances/';
 
         let balanceType;
@@ -48,8 +49,8 @@ class CurrentBalance extends Component {
                 break;
         }
 
-        const res = await axios.get(apiUrl);
-        const allData = this.prepareData(res.data, balanceType);
+        const res = await caxios.cached(ttl).get(apiUrl);
+        const allData = this.constructor.prepareData(res.data, balanceType);
 
         this.setState({ data: allData, totals: res.data['totals'] });
     }
@@ -92,10 +93,15 @@ class CurrentBalance extends Component {
         return totals;
     }
 
-    render() {
+    renderPage() {
         return Template.render(
             (
                 <Page layout="main">
+                    <Section slot="title">
+                        <Helmet>
+                            <title>MCG App // Current balance</title>
+                        </Helmet>
+                    </Section>
                     <Section slot="content">
                         <div className="current-balance-page">
                             <h1>Current Balance</h1>
@@ -109,6 +115,14 @@ class CurrentBalance extends Component {
                     </Section>
                 </Page>
             )
+        );
+    }
+
+    render() {
+        return (
+            <Fragment>
+                {this.renderPage()}
+            </Fragment>
         );
     }
 }
