@@ -25,9 +25,14 @@ class CurrentBalance extends Component {
         let currencies = data['currencies'];
         for (let currencyName in currencies) {
 
+            let value = currencies[currencyName][fieldName];
+            if (currencies[currencyName]['available'] > 0 && !value) {
+                value = 5e-8;
+            }
+
             preparedData.push([
                 currencyName,
-                currencies[currencyName][fieldName]
+                value
             ]);
         }
 
