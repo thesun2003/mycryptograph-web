@@ -4,6 +4,7 @@ import Loader from 'react-loader-spinner'
 import caxios from "../../Common/caxios";
 import Template, { Page, Section } from "../../Common/Templates/Template";
 import DonutChart from '../../Common/Visualisation/DonutChart/DonutChart';
+import confix from '../../Common/confix';
 
 import './CurrentBalance.css';
 
@@ -41,7 +42,9 @@ class CurrentBalance extends Component {
 
     async componentDidMount() {
         const ttl = 5 * 60; // 5 minutes
-        const apiUrl = 'http://mcg-api.local/get-total-balances/';
+        const apiUrl = confix.get('API_URL') + '/get-total-balances/';
+
+        console.log(apiUrl);
 
         let balanceType;
         switch (this.props.balanceType) {
