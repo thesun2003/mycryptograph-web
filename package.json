@@ -14,12 +14,20 @@
     "react-loader-spinner": "^2.0.6",
     "react-page-layout": "^0.9.8",
     "react-router-component": "^0.39.1",
-    "react-scripts": "1.1.5"
+    "react-scripts": "^2.1.1",
+    "serve": "^10.1.1"
   },
   "scripts": {
-    "start": "npm install && REACT_APP_STAGE=dev react-scripts start",
+    "dev": "npm install && REACT_APP_STAGE=dev react-scripts start",
+    "start": "REACT_APP_STAGE=prod serve -s build",
     "build": "REACT_APP_STAGE=prod react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
