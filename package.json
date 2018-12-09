@@ -22,7 +22,8 @@
     "start": "REACT_APP_STAGE=prod serve -s build",
     "build": "REACT_APP_STAGE=prod react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm run build"
   },
   "browserslist": [
     ">0.2%",
