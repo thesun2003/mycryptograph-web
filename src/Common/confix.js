@@ -10,7 +10,7 @@ class confix {
         value = default_settings[parameter] ? default_settings[parameter] : value;
 
         // production settings override
-        if (process.env.NODE_ENV === 'production') {
+        if (process.env.REACT_APP_STAGE === 'prod') {
             value = production_settings[parameter] ? production_settings[parameter] : value;
         }
 
